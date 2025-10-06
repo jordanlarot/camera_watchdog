@@ -177,7 +177,7 @@ This forces the `uvcvideo` driver to reset its connection to the camera without 
 
 ## Limitations
 
-⚠️ **Same-Port Reconnection Only**
+1. ⚠️ **Same-Port Reconnection Only**
 
 This script currently handles camera failures only when the device stays connected to the same physical USB port. Cross-port reconnects aren’t supported yet – that’s expected and can be solved later using persistent device IDs or udev rules.
 
@@ -185,11 +185,25 @@ This script currently handles camera failures only when the device stays connect
 - ✅ **Works:** Camera freezes, device becomes unresponsive while plugged into the same USB port
 - ❌ **Doesn't work:** Camera unplugged and reconnected to a *different* USB port
 
-**Why:** The script uses USB bus IDs (like `3-2:1.0`) which are tied to physical USB ports. If you reconnect a camera to a different port, it gets a new bus ID, breaking the mapping.
+**Why:** 
+The script uses USB bus IDs (like `3-2:1.0`) which are tied to physical USB ports. If you reconnect a camera to a different port, it gets a new bus ID, breaking the mapping.
 
 **Future Solutions:**
 - Use persistent device identifiers (serial numbers, vendor/product IDs)
 - Implement udev rules for cross-port tracking
+
+
+2. ⚠️ **Manual Refresh Required After Rebind**
+
+Even when the watchdog successfully rebinds a camera, the teleop software won’t automatically reinitialize the video stream.
+You’ll need to manually refresh or restart the teleop interface to restore the live feed.
+
+**Why:**
+The rebind resets the USB driver connection at the OS level, but the teleop software still holds the old file descriptor to the previous /dev/videoX stream. Until it’s reopened, no new frames are received.
+
+**Workaround:**
+- After a rebind event, refresh or restart the teleop website.
+- Long-term fix: add automatic stream reinitialization logic in the teleop layer.
 
 ## Requirements
 
