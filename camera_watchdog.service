@@ -1,0 +1,20 @@
+[Unit]
+Description=Camera Watchdog - Monitor and rebind USB cameras
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/lekiwi/camera_watchdog.py # change to user
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Run as root (needed for USB rebinding)
+User=root
+
+# Working directory
+WorkingDirectory=/home/lekiwi # change to user
+
+[Install]
+WantedBy=multi-user.target
