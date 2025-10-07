@@ -14,8 +14,8 @@ This script monitors camera devices configured in `/opt/frodobots/teleop.ini` an
 ## Quickstart 
 1.	Clone and enter the repo
 ```bash
-git clone https://github.com/jordanlarot/camera-watchdog.git
-cd camera-watchdog
+git clone https://github.com/jordanlarot/camera_watchdog.git
+cd camera_watchdog
 ```
 
 2.	Run in test mode (check your config & cameras)
