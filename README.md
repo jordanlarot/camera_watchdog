@@ -113,7 +113,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 /home/<username>/camera_watchdog/camera_watchdog.py # change to user
+ExecStart=/usr/bin/python3 /home/<username>/camera_watchdog/camera_watchdog.py
 Restart=always
 RestartSec=10
 StandardOutput=journal
@@ -123,7 +123,7 @@ StandardError=journal
 User=root
 
 # Working directory
-WorkingDirectory=/home/<username> # change to user
+WorkingDirectory=/home/<username>
 
 [Install]
 WantedBy=multi-user.target
