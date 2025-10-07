@@ -113,7 +113,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 /home/<username>/camera-watchdog/camera_watchdog.py # change to user
+ExecStart=/usr/bin/python3 /home/<username>/camera_watchdog/camera_watchdog.py # change to user
 Restart=always
 RestartSec=10
 StandardOutput=journal
